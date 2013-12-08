@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="WpfApplication5.View.AppointmentsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+             xmlns:vm="clr-namespace:WpfApplication5.ViewModel"
+             xmlns:vw="clr-namespace:WpfApplication5.View"
+             xmlns:dvm="clr-namespace:WpfApplication5.DesignViewModel"
+             mc:Ignorable="d" 
+             >
+    <UserControl.Resources>
+
+        <dvm:DesignAppointmentsViewModel x:Key="DesignAppointmentsViewModel"/>
+        <CollectionViewSource 
+            x:Key="AppointmentGroups" 
+            d:DesignSource="{d:DesignInstance dvm:DesignAppointmentViewModel, CreateList=True}"
+            Source="{Binding Path=Appointments}"
+            >
+            <CollectionViewSource.GroupDescriptions>
+                <PropertyGroupDescription PropertyName="Allday" />
+            </CollectionViewSource.GroupDescriptions>
+            <CollectionViewSource.SortDescriptions>
+                <!-- 
+        Sort descending by Allday so that the 'True' values appear first,
+        which means that memos will always be listed before events.
+        -->
+                <scm:SortDescription PropertyName="Allday" Direction="Descending" />
+                <scm:SortDescription PropertyName="From" Direction="Ascending" />
+            </CollectionViewSource.SortDescriptions>
+        </CollectionViewSource>
+        
+        <DataTemplate DataType="{x:Type vm:AppointmentViewModel}">
+            <vw:AppointmentView />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type vm:AppointmentsViewModel}">
+            <vw:AppointmentsView />
+        </DataTemplate>
+
+    </UserControl.Resources>
+
+    <StackPanel>
+        <ItemsControl
+           ItemsSource="{Binding Source={StaticResource AppointmentGroups}}"
+            Margin="4"
+            />
+
+        <!--<ItemsControl
+            d:DataContext="{d:DesignInstance dvm:DesignAppointmentsViewModel, IsDesignTimeCreatable=True}"
+            ItemsSource="{Binding Path=Appointments}" 
+            Margin="4"
+            />-->
+
+    </StackPanel>
+</UserControl>

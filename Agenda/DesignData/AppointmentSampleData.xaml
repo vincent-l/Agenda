@@ -1,0 +1,7 @@
+﻿<local:DesignAppointment xmlns:local="clr-namespace:WpfApplication5.DesignModel"
+    EventTitle="Rendez-vous coiffeur."
+    Notes="Penser à retirer de l'argent au distributeur."
+    From="12/25/2013 9:30:00 AM" 
+    To="12/25/2013 10:00:00 AM" 
+    Allday="false" 
+    />
