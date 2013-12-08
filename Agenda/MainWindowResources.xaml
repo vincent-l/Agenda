@@ -7,7 +7,6 @@ This resource dictionary is used by the MainWindow.
                     xmlns:vw="clr-namespace:WpfApplication5.View"
                     xmlns:vsm="clr-namespace:System.Windows;assembly=PresentationFramework"
                     >
-
   <!-- 
   This template applies an AppointmentsView to an instance 
   of the AppointmentsViewModel class shown in the main window.
@@ -21,22 +20,7 @@ This resource dictionary is used by the MainWindow.
   of the CalendarViewModel class shown in the main window.
   -->
   <DataTemplate DataType="{x:Type vm:CalendarViewModel}">
-    <vw:CalendarView>
-      <vw:CalendarView.Triggers>
-        <EventTrigger RoutedEvent="vw:CalendarView.VisibilityChanged">
-          <BeginStoryboard>
-            <Storyboard>
-              <DoubleAnimation Storyboard.TargetName="calendar" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:.1"/>
-              <DoubleAnimation Storyboard.TargetName="translation" Storyboard.TargetProperty="X" From="400" To="0" Duration="0:0:.5">
-                <DoubleAnimation.EasingFunction>
-                  <BackEase EasingMode="EaseOut"/>
-                </DoubleAnimation.EasingFunction>
-              </DoubleAnimation>
-            </Storyboard>
-          </BeginStoryboard>
-        </EventTrigger>
-      </vw:CalendarView.Triggers>
-    </vw:CalendarView>
+    <vw:CalendarView />
   </DataTemplate>
   
   <!-- 

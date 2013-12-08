@@ -6,7 +6,35 @@ namespace WpfApplication5
 {
     public static class CalendarBehavior
     {
-        #region Command
+        #region VisibilityChangedEvent
+
+        public static readonly RoutedEvent VisibilityChangedEvent = 
+            EventManager.RegisterRoutedEvent("VisibilityChanged", 
+                                RoutingStrategy.Bubble, 
+                                typeof(RoutedEventHandler),
+                                typeof(CalendarBehavior));
+
+        public static void AddVisibilityChangedHandler(DependencyObject d, RoutedEventHandler handler)
+        {
+            UIElement uie = d as UIElement;
+            if (uie != null)
+            {
+                uie.AddHandler(CalendarBehavior.VisibilityChangedEvent, handler);
+            }
+        }
+
+        public static void RemoveVisibilityChangedHandler(DependencyObject d, RoutedEventHandler handler)
+        {
+            UIElement uie = d as UIElement;
+            if (uie != null)
+            {
+                uie.RemoveHandler(CalendarBehavior.VisibilityChangedEvent, handler);
+            }
+        }
+
+        #endregion // VisibilityChangedEvent
+
+        #region SelectedDateCommand
 
         public static DependencyProperty SelectedDateCommandProperty =
             DependencyProperty.RegisterAttached("SelectedDateCommand",
@@ -52,6 +80,6 @@ namespace WpfApplication5
             command.Execute(null);
         }
 
-        #endregion
+        #endregion // SelectedDateCommand
     }
 }
